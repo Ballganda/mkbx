@@ -3,7 +3,6 @@
 
 ;;A combination of HIDmacros and AutoHotkey
 
-;;88/104
 ;;88 keys assignable to ahk scripts on additonal 104 keyboards
 ;;By Richard Thomas
 
@@ -39,9 +38,14 @@
 ;;After F13-F24 are used up I do not know other prefix keys HIDmacros would
 ;;recognize. At the point I would attempt multiple prefix and nesting script
 
+;;How many keyboards can be added
+;;-----------------------------------------------------------------------
+;;I did not try to script for modifiers. Single key for single macro
+
 ;;Quirks?
 ;;-----------------------------------------------------------------------
 ;;Windows calculator not compatible so I am sure other apps are not.
+;;Use numlock always on else numpad keys become up, down, etc.
 ;;{anykey} up:: assignment is not really compatible because HIDmacros sends
 ;;the key event and the up event from software. As soon as you press a key
 ;;HIDmacros sends that key press followed by the up event. Additionally the
