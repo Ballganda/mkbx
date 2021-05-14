@@ -12,8 +12,8 @@
 
 ;;What in tarnation have you bodged here
 ;;-----------------------------------------------------------------------
-;;This script is to put your macro hotkeys on a key of additonal keyboard/s
-;;This method uses a HIDmacros user instance setup to prefixkeys on 
+;;This script set is to put your macro hotkeys on a key of additonal keyboard/s
+;;This method uses a HIDmacros user instance setup to prefix keys on 
 ;;additional keyboards with F13-Fxx. Using free software with only the cost
 ;;of the additional keyboard/s. 
 
@@ -33,9 +33,11 @@
 
 ;;How many keyboards can be added
 ;;-----------------------------------------------------------------------
-;;I do not know the limit.
+;;I do not know the limit. 
+;;F13-F24 is 12 so that is the limit of copy pasting this script
 ;;I only have 4 keyboards. I did basic testing with one regular + mkbx3
-
+;;After F13-F24 are used up I do not know other prefix keys HIDmacros would
+;;recognize. At the point I would attempt multiple prefix and nesting script
 
 ;;Quirks?
 ;;-----------------------------------------------------------------------
