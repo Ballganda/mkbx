@@ -36,7 +36,7 @@
 ;;F13-F24 is 12 so that is the limit of copy pasting this script
 ;;I only have 4 keyboards. I did basic testing with one regular + mkbx3
 ;;After F13-F24 are used up I do not know other prefix keys HIDmacros would
-;;recognize. At the point I would attempt multiple prefix and nesting script
+;;recognize. At that point I would attempt multiple prefix and nesting script
 
 ;;How many keyboards can be added
 ;;-----------------------------------------------------------------------
