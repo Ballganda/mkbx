@@ -38,7 +38,7 @@
 ;;After F13-F24 are used up I do not know other prefix keys HIDmacros would
 ;;recognize. At that point I would attempt multiple prefix and nesting script
 
-;;How many keyboards can be added
+;;Can modifiers be used
 ;;-----------------------------------------------------------------------
 ;;I did not try to script for modifiers. Single key for single macro
 
