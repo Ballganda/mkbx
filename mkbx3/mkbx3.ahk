@@ -51,16 +51,17 @@ return
 
 ;;Clear those nasty tooltips with the escape key on any keyboard.
 ;;Can be ESC from additional keyboards
-if (prefix = 0)
-{
 esc::
+tooltip, [F%prefix%] %A_thishotKey%
 send, {esc}
+sleep 500
 tooltip,
 return
-}
+
 
 ;;######################################################
-;; Enter the Fxx keyboard 
+;; Enter the Fxx keyboard
+;; Macro Keyboard X mkb01
 ;;######################################################
 
 #if (prefix = 13)
@@ -77,7 +78,7 @@ F1::
 tooltip, [F%prefix%] %A_thishotKey% ;;optional tooltip
 prefix:=0 ;;required reset of the prefix var
 ;;###############################
-;; Here it where you script
+;; Here is where you script
 ;;###############################
 
 ;;###############################
@@ -563,7 +564,8 @@ return
 ;;######################################################
 
 ;;######################################################
-;; Enter the Fxx keyboard 
+;; Enter the Fxx keyboard
+;; Macro Keyboard X mkb02
 ;;######################################################
 
 #if (prefix = 14)
@@ -1064,7 +1066,8 @@ return
 ;;######################################################
 
 ;;######################################################
-;; Enter the Fxx keyboard 
+;; Enter the Fxx keyboard
+;; Macro Keyboard X mkb03
 ;;######################################################
 
 #if (prefix = 15)
