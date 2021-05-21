@@ -13,20 +13,19 @@
 ;;-----------------------------------------------------------------------
 ;;This script set is to put your macro hotkeys on a key of additonal keyboard/s
 ;;This method uses a HIDmacros user instance setup to prefix keys on 
-;;additional keyboards with F13-Fxx. Using free software with only the cost
+;;additional keyboards with F24-F13. Using free software with only the cost
 ;;of the additional keyboard/s.
 
 
-;;I didn't look much into what is going on here
+;;I didn't look much into what is going on here. Sounded good in the AHK help
 ;;-----------------------------------------------------------------------
 #MaxHotkeysPerInterval 2000 ;;specifies the rate of hotkey activations beyond which a warning dialog will be displayed. 
 #SingleInstance force ;;Determines whether a script is allowed to run again when it is already running.
 #WinActivateForce ;;Skips the gentle method of activating a window and goes straight to the forceful method
 #NoEnv ;;Avoids checking empty variables to see if they are environment variables
-;;I do not know if #InstallKeybdHook is needed, I did most testing without
 #InstallKeybdHook ;;Forces the unconditional installation of the keyboard hook.
 ;;#InstallMouseHook ;;Forces the unconditional installation of the mouse hook
-#UseHook On ;;Forces the use of the hook to implement all or some keyboard hotkeys
+#UseHook On ;;Forces the use of the hook to implement all keyboard hotkeys
 
 ;;Here we go
 ;;-----------------------------------------------------------------------
@@ -35,22 +34,21 @@ prefix:=0
 
 ;;Detect Fxx prefix up event. HIDmacros sends press and up.
 ;;Up event is closest to the next key HIDmacros sends.
-;;HIDmacros is to send for example the key below(way down) q as {F13}q
+;;HIDmacros is to send for example the key below(way down) q as {F24}q
 
-F13 up::
-prefix:=13
+*F24 up::
+prefix:=24
 return
 
-F14 up::
-prefix:=14
+*F23 up::
+prefix:=23
 return
 
-F15 up::
-prefix:=15
+*F22 up::
+prefix:=22
 return
 
 ;;Clear those nasty tooltips with the escape key on any keyboard.
-;;Can be ESC from additional keyboards
 esc::
 tooltip, [F%prefix%] %A_thishotKey%
 send, {esc}
@@ -58,25 +56,40 @@ sleep 500
 tooltip,
 return
 
+;;######################################################
+;; Enter the normal keyboard 
+;;######################################################
+#if (prefix = 0)
+{ 
+;; Place hotkeys for normal keyboard here
+;; Left this blank bc this is normal and not what this config is about
+;;###############################
+;; Here is where you script
+;;###############################
+
+;;###############################
+return
+} ;; End of normal keyboard assignments
 
 ;;######################################################
-;; Enter the Fxx keyboard
-;; Macro Keyboard X mkb01
+;; End of the normal keyboard
 ;;######################################################
 
-#if (prefix = 13)
+;;######################################################
+;; Enter the Fxx keyboard 
+;;######################################################
+
+#if (prefix = 24)
 {
 
 ;;*************************
 ;;Row 1
 ;;*************************
 
-;;esc did not play ball. So I cut it out of additional keyboards
-;;esc from all keyboards used to clear tooltips if you leave them in.
-
-F1::
-tooltip, [F%prefix%] %A_thishotKey% ;;optional tooltip
+*F1:: ;;Wild card used. See F2 examples for more info
+tooltip, [F%prefix%] %A_thishotKey% ;;tooltip on all keys
 prefix:=0 ;;required reset of the prefix var
+
 ;;###############################
 ;; Here is where you script
 ;;###############################
@@ -84,57 +97,95 @@ prefix:=0 ;;required reset of the prefix var
 ;;###############################
 return
 
+;; F2 Examples with modifiers
+;; If assigning modifiers you need to do something with all modifier options.
+;; Just having the macro do the prefix:=0 is enough. If you leave a modifier
+;; option unassigned the F%prefix% is primed and not reset to 0 by a macro.
+;; The next key you press will run the macro of the that F%prefix% key. BAD!!
+ 
+;; First remove the * wild card from F2
 F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F3::
+;; Can assign left and right modifiers separately
+;; If one side is assigned, assign the other to at least reset prefix:=0
+;; Example adding left WIN modifier hotkey
+<#F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F4::
+;; Example adding right WIN modifier hotkey
+>#F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F5::
+;; ALT modifier does not appear to work with HIDmacros
+
+;; Example adding CTRL modifier hotkey
+^F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F6::
+;; Example adding SHIFT modifier hotkey
++F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F7::
+;; All keys not having modifiers setup have the wildcard * so
+;; the key assigned macro is always ran and prefix:=0 always gets set. 
+
+*F3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F9::
+*F4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F8::
+*F5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F10::
+*F6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F11::
+*F7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F12::
+*F9::
+tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0 
+return
+
+*F8::
+tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0 
+return
+
+*F10::
+tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0 
+return
+
+*F11::
+tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0 
+return
+
+*F12::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -143,74 +194,74 @@ return
 ;;Row 2
 ;;*************************
 
-`::
+*`::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-1::
+*1::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0
 return
 
-2::
+*2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0
 return
 
-3::
+*3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-4::
+*4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-5::
+*5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-6::
+*6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-7::
+*7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-8::
+*8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-9::
+*9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-0::
+*0::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
--::
+*-::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-=::
+*=::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
 ;;Baskspace sorta works it takes a double click for some reason to get it going.
 ;;First Bksp is blocked, second fires script. Sketchy bodge.
-backspace::
+*backspace::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -219,72 +270,72 @@ return
 ;;Row 3
 ;;*************************
 
-tab::
+*tab::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-q::
+*q::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-w::
+*w::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-e::
+*e::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-r::
+*r::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-t::
+*t::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-y::
+*y::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-u::
+*u::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-i::
+*i::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-o::
+*o::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-p::
+*p::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-[::
+*[::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-]::
+*]::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-\::
+*\::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -293,62 +344,62 @@ return
 ;;Row 4
 ;;*************************
 
-a::
+*a::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-s::
+*s::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-d::
+*d::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-f::
+*f::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-g::
+*g::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-h::
+*h::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-j::
+*j::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-k::
+*k::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-l::
+*l::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-`;::
+*`;::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-'::
+*'::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-enter::
+*enter::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -357,52 +408,52 @@ return
 ;;Row 5
 ;;*************************
 
-z::
+*z::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-x::
+*x::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-c::
+*c::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-v::
+*v::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-b::
+*b::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-n::
+*n::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-m::
+*m::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-,::
+*,::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-.::
+*.::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-/::
+*/::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -411,7 +462,7 @@ return
 ;;Row 6
 ;;*************************
 
-space::
+*space::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -420,32 +471,32 @@ return
 ;;Insert area
 ;;*************************
 
-insert::
+*insert::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-delete::
+*delete::
+tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0 
+*return
+
+*home::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-home::
+*end::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-end::
+*pgup::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-pgup::
-tooltip, [F%prefix%] %A_thishotKey%
-prefix:=0 
-return
-
-pgdn::
+*pgdn::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -454,22 +505,22 @@ return
 ;;Arrow area
 ;;*************************
 
-up::
+*up::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-down::
+*down::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-left::
+*left::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-right::
+*right::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -478,79 +529,79 @@ return
 ;;Numpad area
 ;;*************************
 
-numpad0::
+*numpad0::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad1::
+*numpad1::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad2::
+*numpad2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad3::
+*numpad3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad4::
+*numpad4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad5::
+*numpad5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad6::
+*numpad6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad7::
+*numpad7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad8::
+*numpad8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad9::
+*numpad9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadDiv::
+*numpadDiv::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
 ;;numpadMult sorta works it takes a double click for some reason to get it going.
 ;;First numpadMult is blocked, second fires script. Sketchy bodge.
-numpadMult::
+*numpadMult::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadSub::
+*numpadSub::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadAdd::
+*numpadAdd::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadDot::
+*numpadDot::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -564,79 +615,72 @@ return
 ;;######################################################
 
 ;;######################################################
-;; Enter the Fxx keyboard
-;; Macro Keyboard X mkb02
+;; Enter the Fxx keyboard 
 ;;######################################################
 
-#if (prefix = 14)
+#if (prefix = 23)
 {
 
 ;;*************************
 ;;Row 1
 ;;*************************
 
-;;esc did not play ball. So I cut it out of additional keyboards
-;;esc from all keyboards used to clear tooltips if you leave them in.
-
-F1::
-;;###############################
-;; Here it where you macro
-;;###############################
+*F1::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 ;;required reset of the prefix var
 return
 
-F2::
+*F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F3::
+*F3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F4::
+*F4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F5::
+*F5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F6::
+*F6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F7::
+*F7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F9::
+*F9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F8::
+*F8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F10::
+*F10::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F11::
+*F11::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F12::
+*F12::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -645,74 +689,74 @@ return
 ;;Row 2
 ;;*************************
 
-`::
+*`::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-1::
+*1::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-2::
+*2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-3::
+*3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-4::
+*4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-5::
+*5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-6::
+*6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-7::
+*7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-8::
+*8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-9::
+*9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-0::
+*0::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
--::
+*-::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-=::
+*=::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
 ;;Baskspace sorta works it takes a double click for some reason to get it going.
 ;;First Bksp is blocked, second fires script. Sketchy bodge.
-backspace::
+*backspace::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -721,72 +765,72 @@ return
 ;;Row 3
 ;;*************************
 
-tab::
+*tab::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-q::
+*q::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-w::
+*w::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-e::
+*e::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-r::
+*r::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-t::
+*t::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-y::
+*y::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-u::
+*u::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-i::
+*i::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-o::
+*o::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-p::
+*p::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-[::
+*[::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-]::
+*]::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-\::
+*\::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -795,62 +839,62 @@ return
 ;;Row 4
 ;;*************************
 
-a::
+*a::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-s::
+*s::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-d::
+*d::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-f::
+*f::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-g::
+*g::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-h::
+*h::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-j::
+*j::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-k::
+*k::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-l::
+*l::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-`;::
+*`;::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-'::
+*'::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-enter::
+*enter::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -859,52 +903,52 @@ return
 ;;Row 5
 ;;*************************
 
-z::
+*z::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-x::
+*x::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-c::
+*c::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-v::
+*v::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-b::
+*b::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-n::
+*n::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-m::
+*m::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-,::
+*,::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-.::
+*.::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-/::
+*/::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -913,7 +957,7 @@ return
 ;;Row 6
 ;;*************************
 
-space::
+*space::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -922,32 +966,32 @@ return
 ;;Insert area
 ;;*************************
 
-insert::
+*insert::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-delete::
+*delete::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-home::
+*home::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-end::
+*end::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-pgup::
+*pgup::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-pgdn::
+*pgdn::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -956,17 +1000,17 @@ return
 ;;Arrow area
 ;;*************************
 
-up::
+*up::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-down::
+*down::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-left::
+*left::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -980,79 +1024,79 @@ return
 ;;Numpad area
 ;;*************************
 
-numpad0::
+*numpad0::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad1::
+*numpad1::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad2::
+*numpad2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad3::
+*numpad3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad4::
+*numpad4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad5::
+*numpad5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad6::
+*numpad6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad7::
+*numpad7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad8::
+*numpad8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad9::
+*numpad9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadDiv::
+*numpadDiv::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
 ;;numpadMult sorta works it takes a double click for some reason to get it going.
 ;;First numpadMult is blocked, second fires script. Sketchy bodge.
-numpadMult::
+*numpadMult::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadSub::
+*numpadSub::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadAdd::
+*numpadAdd::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadDot::
+*numpadDot::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1066,79 +1110,72 @@ return
 ;;######################################################
 
 ;;######################################################
-;; Enter the Fxx keyboard
-;; Macro Keyboard X mkb03
+;; Enter the Fxx keyboard 
 ;;######################################################
 
-#if (prefix = 15)
+#if (prefix = 22)
 {
 
 ;;*************************
 ;;Row 1
 ;;*************************
 
-;;esc did not play ball. So I cut it out of additional keyboards
-;;esc from all keyboards used to clear tooltips if you leave them in.
-
-F1::
-;;###############################
-;; Here it where you macro
-;;###############################
+*F1::
 tooltip, [F%prefix%] %A_thishotKey%
-prefix:=0 ;;required reset of the prefix var
+prefix:=0
 return
 
-F2::
+*F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F3::
+*F3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F4::
+*F4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F5::
+*F5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F6::
+*F6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F7::
+*F7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F9::
+*F9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F8::
+*F8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F10::
+*F10::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F11::
+*F11::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-F12::
+*F12::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1147,74 +1184,74 @@ return
 ;;Row 2
 ;;*************************
 
-`::
+*`::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-1::
+*1::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-2::
+*2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-3::
+*3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-4::
+*4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-5::
+*5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-6::
+*6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-7::
+*7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-8::
+*8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-9::
+*9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-0::
+*0::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
--::
+*-::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-=::
+*=::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
 ;;Baskspace sorta works it takes a double click for some reason to get it going.
 ;;First Bksp is blocked, second fires script. Sketchy bodge.
-backspace::
+*backspace::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1223,72 +1260,72 @@ return
 ;;Row 3
 ;;*************************
 
-tab::
+*tab::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-q::
+*q::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-w::
+*w::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-e::
+*e::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-r::
+*r::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-t::
+*t::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-y::
+*y::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-u::
+*u::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-i::
+*i::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-o::
+*o::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-p::
+*p::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-[::
+*[::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-]::
+*]::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-\::
+*\::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1297,62 +1334,62 @@ return
 ;;Row 4
 ;;*************************
 
-a::
+*a::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-s::
+*s::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-d::
+*d::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-f::
+*f::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-g::
+*g::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-h::
+*h::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-j::
+*j::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-k::
+*k::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-l::
+*l::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-`;::
+*`;::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-'::
+*'::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-enter::
+*enter::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1361,52 +1398,52 @@ return
 ;;Row 5
 ;;*************************
 
-z::
+*z::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-x::
+*x::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-c::
+*c::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-v::
+*v::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-b::
+*b::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-n::
+*n::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-m::
+*m::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-,::
+*,::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-.::
+*.::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-/::
+*/::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1415,7 +1452,7 @@ return
 ;;Row 6
 ;;*************************
 
-space::
+*space::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1424,32 +1461,32 @@ return
 ;;Insert area
 ;;*************************
 
-insert::
+*insert::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-delete::
+*delete::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-home::
+*home::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-end::
+*end::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-pgup::
+*pgup::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-pgdn::
+*pgdn::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1458,17 +1495,17 @@ return
 ;;Arrow area
 ;;*************************
 
-up::
+*up::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-down::
+*down::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-left::
+*left::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -1482,79 +1519,79 @@ return
 ;;Numpad area
 ;;*************************
 
-numpad0::
+*numpad0::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad1::
+*numpad1::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad2::
+*numpad2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad3::
+*numpad3::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad4::
+*numpad4::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad5::
+*numpad5::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad6::
+*numpad6::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad7::
+*numpad7::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad8::
+*numpad8::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpad9::
+*numpad9::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadDiv::
+*numpadDiv::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
 ;;numpadMult sorta works it takes a double click for some reason to get it going.
 ;;First numpadMult is blocked, second fires script. Sketchy bodge.
-numpadMult::
+*numpadMult::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadSub::
+*numpadSub::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadAdd::
+*numpadAdd::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-numpadDot::
+*numpadDot::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return

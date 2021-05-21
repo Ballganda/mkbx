@@ -13,7 +13,7 @@
 ;;-----------------------------------------------------------------------
 ;;This script set is to put your macro hotkeys on a key of additonal keyboard/s
 ;;This method uses a HIDmacros user instance setup to prefix keys on 
-;;additional keyboards with F13-Fxx. Using free software with only the cost
+;;additional keyboards with F24-F13. Using free software with only the cost
 ;;of the additional keyboard/s. 
 
 ;;Do I know what I am doing
@@ -33,14 +33,14 @@
 ;;How many keyboards can be added
 ;;-----------------------------------------------------------------------
 ;;I do not know the limit. 
-;;F13-F24 is 12 so that is the limit of copy pasting this script
+;;F24-F13 is 12 so that is the limit of copy pasting this script
 ;;I only have 4 keyboards. I did basic testing with one regular + mkbx3
-;;After F13-F24 are used up I do not know other prefix keys HIDmacros would
+;;After F24-F13 are used up I do not know other prefix keys HIDmacros would
 ;;recognize. At that point I would attempt multiple prefix and nesting script
 
 ;;Can modifiers be used
 ;;-----------------------------------------------------------------------
-;;I did not try to script for modifiers. Single key for single macro
+;; Yes, most of them. ALT can not be used. HIDmacros limitation.
 
 ;;Quirks?
 ;;-----------------------------------------------------------------------
@@ -58,7 +58,7 @@
 ;;Have to plug same keyboard into the same USB port I believe for HIDmacros 
 ;;assignment to stay correct. May have to close and start HIDmacros again 
 ;;when replugging a keyboard in...If only I could use a hotkey on my main
-;;keyboard to toggle HIDmacros in mkbx setup when I dock my laptop etc that
+;;keyboard to toggle HIDmacros on/off when I dock my laptop etc that
 ;;would fix this.
 
 ;;Is this likely to work for xyz use case and will I bug fix
@@ -76,7 +76,7 @@
 ;;HIDmacros must be run the first time as admin. Running as admin causes it not
 ;;to work in many apps. After initial as admin launch close HIDmacros and
 ;;reopen normal(as the user account you are on). Doing those steps
-;;makes this mkbx setup work in more apps, notably M$ Excel
+;;makes this HIDmacros/mkbx setup work in more apps, notably M$ Excel
 ;;and Word.
 
 ;;Using outdated,not supported, now open source HIDmacros why?
@@ -85,6 +85,6 @@
 ;;keyboard fine. If I could code I would take the open source code, strip
 ;;all the unused(for this) bits out of it and add in the options for prefix or
 ;;wrapper mode for keyboards. Would make it easier than copy pasting 1000+lines
-;;of config file and replaces F13 with Fxx and keyboard name change. 
+;;of config file and replacing F24 with Fxx and keyboard name change. 
 ;;Keyboard list, test area, assign fxx to mkbx thats all 
-;;that is used
+;;that is used.

@@ -8,7 +8,7 @@
 
 ;;What is in the folder mkbx3
 ;;-----------------------------------------------------------------------
-;;mkbx3 has the config for for HIDmacros to prefix 3 additional keyboard with F13, F14, F15
+;;mkbx3 has the config for for HIDmacros to prefix 3 additional keyboard with F24, F23, F22
 ;;and the mkbx3 AutoHotkey base definition script to put your hotkey definition into
 
 ;;Why not one HIDmacros config file with everything defined up to mkbx12 
@@ -47,7 +47,7 @@
 ;;Now run the associated mkbx3.ahk file.
 
 ;;Done. Done. Now all the assignable keys on the mkbx you setup should have popup tool tips that
-;;tell which keyboard was pressed and which key. Example mkb01 key 1 is "[F13] 1" tooltip. 
+;;tell which keyboard was pressed and which key. Example mkb01 key 1 is "[F24] 1" tooltip. 
 ;;The Esc key on any keyboard clears the tooltips
 
 ;;Now it is up to you put in the script for what you want each key to do.
