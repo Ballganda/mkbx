@@ -89,7 +89,6 @@ prefix:=0
 *F1:: ;;Wild card used. See F2 examples for more info
 tooltip, [F%prefix%] %A_thishotKey% ;;tooltip on all keys
 prefix:=0 ;;required reset of the prefix var
-
 ;;###############################
 ;; Here is where you script
 ;;###############################
@@ -97,12 +96,13 @@ prefix:=0 ;;required reset of the prefix var
 ;;###############################
 return
 
-;; F2 Examples with modifiers
+
 ;; If assigning modifiers you need to do something with all modifier options.
 ;; Just having the macro do the prefix:=0 is enough. If you leave a modifier
 ;; option unassigned the F%prefix% is primed and not reset to 0 by a macro.
 ;; The next key you press will run the macro of the that F%prefix% key. BAD!!
- 
+
+;; F2 Examples with modifiers
 ;; First remove the * wild card from F2
 F2::
 tooltip, [F%prefix%] %A_thishotKey%
@@ -111,20 +111,6 @@ return
 
 ;; Can assign left and right modifiers separately
 ;; If one side is assigned, assign the other to at least reset prefix:=0
-;; Example adding left WIN modifier hotkey
-<#F2::
-tooltip, [F%prefix%] %A_thishotKey%
-prefix:=0 
-return
-
-;; Example adding right WIN modifier hotkey
->#F2::
-tooltip, [F%prefix%] %A_thishotKey%
-prefix:=0 
-return
-
-;; ALT modifier does not appear to work with HIDmacros
-
 ;; Example adding CTRL modifier hotkey
 ^F2::
 tooltip, [F%prefix%] %A_thishotKey%
@@ -133,6 +119,14 @@ return
 
 ;; Example adding SHIFT modifier hotkey
 +F2::
+tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0 
+return
+
+;; WIN modifier does not work well
+;; ALT modifier does not work well
+#F2::
+!F2::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
@@ -171,8 +165,6 @@ return
 *0::
 *-::
 *=::
-;;Baskspace sorta works it takes a double click for some reason to get it going.
-;;First Bksp is blocked, second fires script. Sketchy bodge.
 *backspace::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
@@ -288,8 +280,6 @@ return
 *numpad8::
 *numpad9::
 *numpadDiv::
-;;numpadMult sorta works it takes a double click for some reason to get it going.
-;;First numpadMult is blocked, second fires script. Sketchy bodge.
 *numpadMult::
 *numpadSub::
 *numpadAdd::
@@ -349,8 +339,6 @@ return
 *0::
 *-::
 *=::
-;;Baskspace sorta works it takes a double click for some reason to get it going.
-;;First Bksp is blocked, second fires script. Sketchy bodge.
 *backspace::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
@@ -466,8 +454,6 @@ return
 *numpad8::
 *numpad9::
 *numpadDiv::
-;;numpadMult sorta works it takes a double click for some reason to get it going.
-;;First numpadMult is blocked, second fires script. Sketchy bodge.
 *numpadMult::
 *numpadSub::
 *numpadAdd::
@@ -527,8 +513,6 @@ return
 *0::
 *-::
 *=::
-;;Baskspace sorta works it takes a double click for some reason to get it going.
-;;First Bksp is blocked, second fires script. Sketchy bodge.
 *backspace::
 tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
@@ -644,8 +628,6 @@ return
 *numpad8::
 *numpad9::
 *numpadDiv::
-;;numpadMult sorta works it takes a double click for some reason to get it going.
-;;First numpadMult is blocked, second fires script. Sketchy bodge.
 *numpadMult::
 *numpadSub::
 *numpadAdd::

@@ -40,7 +40,7 @@
 
 ;;Can modifiers be used
 ;;-----------------------------------------------------------------------
-;; Yes, most of them. ALT can not be used. HIDmacros limitation.
+;; Yes, some of them. ALT and WIN can not be used. HIDmacros limitation.?.
 
 ;;Quirks?
 ;;-----------------------------------------------------------------------
