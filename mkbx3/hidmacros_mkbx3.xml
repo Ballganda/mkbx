@@ -315,7 +315,7 @@
       <KeyCode>8</KeyCode>
       <Direction>down</Direction>
       <Action>SEQ</Action>
-      <Sequence>{F24}{BKSP}</Sequence>
+      <Sequence>{F24}{BACKSPACE}</Sequence>
       <SCEvent></SCEvent>
       <XPLCommand></XPLCommand>
       <ScriptSource></ScriptSource>
@@ -777,7 +777,7 @@
       <KeyCode>106</KeyCode>
       <Direction>down</Direction>
       <Action>SEQ</Action>
-      <Sequence>{F24}{NUMAST}</Sequence>
+      <Sequence>{F24}{NUMMULTIPLY}</Sequence>
       <SCEvent></SCEvent>
       <XPLCommand></XPLCommand>
       <ScriptSource></ScriptSource>
@@ -1547,7 +1547,7 @@
       <KeyCode>8</KeyCode>
       <Direction>down</Direction>
       <Action>SEQ</Action>
-      <Sequence>{F23}{BKSP}</Sequence>
+      <Sequence>{F23}{BACKSPACE}</Sequence>
       <SCEvent></SCEvent>
       <XPLCommand></XPLCommand>
       <ScriptSource></ScriptSource>
@@ -2009,7 +2009,7 @@
       <KeyCode>106</KeyCode>
       <Direction>down</Direction>
       <Action>SEQ</Action>
-      <Sequence>{F23}{NUMAST}</Sequence>
+      <Sequence>{F23}{NUMMULTIPLY}</Sequence>
       <SCEvent></SCEvent>
       <XPLCommand></XPLCommand>
       <ScriptSource></ScriptSource>
@@ -2779,7 +2779,7 @@
       <KeyCode>8</KeyCode>
       <Direction>down</Direction>
       <Action>SEQ</Action>
-      <Sequence>{F22}{BKSP}</Sequence>
+      <Sequence>{F22}{BACKSPACE}</Sequence>
       <SCEvent></SCEvent>
       <XPLCommand></XPLCommand>
       <ScriptSource></ScriptSource>
@@ -3241,7 +3241,7 @@
       <KeyCode>106</KeyCode>
       <Direction>down</Direction>
       <Action>SEQ</Action>
-      <Sequence>{F22}{NUMAST}</Sequence>
+      <Sequence>{F22}{NUMMULTIPLY}</Sequence>
       <SCEvent></SCEvent>
       <XPLCommand></XPLCommand>
       <ScriptSource></ScriptSource>
