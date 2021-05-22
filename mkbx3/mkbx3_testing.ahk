@@ -49,12 +49,12 @@ prefix:=22
 return
 
 ;;Clear those nasty tooltips with the escape key on any keyboard.
-esc::
-tooltip, [F%prefix%] %A_thishotKey%
-send, {esc}
-sleep 500
-tooltip,
-return
+;;esc::
+;;tooltip, [F%prefix%] %A_thishotKey%
+;;send, {esc}
+;;sleep 500
+;;tooltip,
+;;return
 
 ;;######################################################
 ;; Enter the normal keyboard 
@@ -66,7 +66,11 @@ return
 ;;###############################
 ;; Here is where you script
 ;;###############################
-
+esc::
+tooltip, [F%prefix%] %A_thishotKey%
+sleep 500
+tooltip,
+return
 ;;###############################
 return
 } ;; End of normal keyboard assignments
@@ -81,10 +85,16 @@ return
 
 #if (prefix = 24)
 {
-prefix:=0
 ;;*************************
 ;;Row 1
 ;;*************************
+
+*esc::
+tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0
+sleep 500
+tooltip,
+return
 
 *F1:: ;;Wild card used. See F2 examples for more info
 tooltip, [F%prefix%] %A_thishotKey% ;;tooltip on all keys

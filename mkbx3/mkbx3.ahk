@@ -1,11 +1,8 @@
-;;# mkbx
+;;# mkbx By Richard Thomas
 ;;Macro Keyboard X
 
 ;;A combination of HIDmacros and AutoHotkey
-
 ;;88 keys assignable to ahk scripts on additonal 104 keyboards
-;;By Richard Thomas
-
 ;;Credit: Inspired by @taranvh and his/ltts videos Link to Taran's work:
 ;;https://github.com/TaranVH/2nd-keyboard/tree/master/HASU_USB
 
@@ -51,6 +48,7 @@ return
 ;;Clear those nasty tooltips with the escape key on any keyboard.
 esc::
 tooltip, [F%prefix%] %A_thishotKey%
+prefix:=0
 send, {esc}
 sleep 500
 tooltip,
@@ -72,7 +70,7 @@ return
 } ;; End of normal keyboard assignments
 
 ;;######################################################
-;; Enter the Fxx keyboard 
+;; Enter the F24 keyboard 
 ;;######################################################
 
 #if (prefix = 24)
@@ -89,13 +87,13 @@ prefix:=0 ;;required reset of the prefix var
 ;;###############################
 
 ;;###############################
-return
+return ;; return out of IF after the hotkey is done
 
-
-;; If assigning modifiers you need to do something with all modifier options.
+;; If assigning modifiers you should to do something with all modifier options.
 ;; Just having the macro do the prefix:=0 is enough. If you leave a modifier
 ;; option unassigned the F%prefix% is primed and not reset to 0 by a macro.
-;; The next key you press will run the macro of the that F%prefix% key. BAD!!
+;; The next key you press will run the macro of the that F%prefix% key even if
+;; it is on the normal keyboard. BAD!!
 
 ;; F2 Examples with modifiers
 ;; First remove the * wild card from F2
@@ -118,8 +116,8 @@ tooltip, [F%prefix%] %A_thishotKey%
 prefix:=0 
 return
 
-;; WIN modifier does not work well
-;; ALT modifier does not work well
+;; WIN modifier does not work
+;; ALT modifier does not work
 #F2::
 !F2::
 tooltip, [F%prefix%] %A_thishotKey%
@@ -288,7 +286,7 @@ return
 } ;;End of Fxx hotkeys assignment
 
 ;;######################################################
-;; Enter the Fxx keyboard 
+;; Enter the F23 keyboard 
 ;;######################################################
 
 #if (prefix = 23)
@@ -458,7 +456,7 @@ return
 } ;;End of Fxx hotkeys assignment
 
 ;;######################################################
-;; Enter the Fxx keyboard 
+;; Enter the F22 keyboard 
 ;;######################################################
 
 #if (prefix = 22)
