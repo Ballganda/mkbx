@@ -4,7 +4,7 @@
 ;;A combination of HIDmacros and AutoHotkey
 
 ;;88 keys assignable to ahk scripts on additonal 104 keyboards
-;;By Richard Thomas
+;;By Ballganda
 
 ;;Credit: Inspired by @taranvh and his/ltts videos Link to Taran's work:
 ;;https://github.com/TaranVH/2nd-keyboard/tree/master/HASU_USB
