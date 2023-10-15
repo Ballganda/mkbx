@@ -1,4 +1,4 @@
-;;# mkbx By Richard Thomas
+;;# mkbx By Ballganda
 ;;Macro Keyboard X
 
 ;;A combination of HIDmacros and AutoHotkey
