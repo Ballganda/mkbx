@@ -4,7 +4,7 @@
 ;;A combination of HIDmacros and AutoHotkey
 
 ;;88 keys assignable to ahk scripts on additonal 104 keyboards
-;;By Richard Thomas
+;;By Ballganda
 
 ;;What is in the folder mkbx3
 ;;-----------------------------------------------------------------------
